@@ -9,38 +9,38 @@
 <body>
     <div class="container">
     		<div class="row">
-    			<h3>Customer FIle</h3>
+    			<h3>Solutio Customer FIle</h3>
     		</div>
 			<div class="row">
 				<p>
-					<a href="create.php" class="btn btn-success">Create</a>
+					<a href="solutio_create.php" class="btn btn-success">Create</a>
 				</p>
 				
 				<table class="table table-striped table-bordered">
 		              <thead>
 		                <tr>
-		                  <th>Name</th>
-		                  <th>Email Address</th>
-		                  <th>Mobile Number</th>
-		                  <th>Action</th>
+		                  <th>Client Name</th>
+		                  <th>Client Email Address</th>
+		                  <th>Business Name</th>
+		              <th>Action</th>
 		                </tr>
 		              </thead>
 		              <tbody>
 		              <?php 
 					   include 'database.php';
 					   $pdo = Database::connect();
-					   $sql = 'SELECT * FROM solutio ORDER BY id DESC';
+					   $sql = 'SELECT * FROM customers ORDER BY id DESC';
 	 				   foreach ($pdo->query($sql) as $row) {
 						   		echo '<tr>';
 							   	echo '<td>'. $row['name'] . '</td>';
 							   	echo '<td>'. $row['email'] . '</td>';
 							   	echo '<td>'. $row['mobile'] . '</td>';
 							   	echo '<td width=250>';
-							   	echo '<a class="btn" href="read.php?id='.$row['id'].'">Read</a>';
+							   	echo '<a class="btn" href="solutio_read.php?id='.$row['id'].'">Read</a>';
 							   	echo '&nbsp;';
 							   	echo '<a class="btn btn-success" href="solutio_update.php?id='.$row['id'].'">Update</a>';
 							   	echo '&nbsp;';
-							   	echo '<a class="btn btn-danger" href="delete.php?id='.$row['id'].'">Delete</a>';
+							   	echo '<a class="btn btn-danger" href="solutio_delete.php?id='.$row['id'].'">Delete</a>';
 							   	echo '</td>';
 							   	echo '</tr>';
 					   }

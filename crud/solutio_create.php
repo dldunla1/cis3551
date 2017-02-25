@@ -2,15 +2,6 @@
 	
 	require 'database.php';
 
-	$id = null;
-	if ( !empty($_GET['id'])) {
-		$id = $_REQUEST['id'];
-	}
-	
-	if ( null==$id ) {
-		header("Location: solutio.php");
-	}
-	
 	if ( !empty($_POST)) {
 		// keep track validation errors
 		$nameError = null;
@@ -25,12 +16,12 @@
 		// validate input
 		$valid = true;
 		if (empty($name)) {
-			$nameError = 'Please enter Name';
+			$nameError = 'Please enter Client Name';
 			$valid = false;
 		}
 		
 		if (empty($email)) {
-			$emailError = 'Please enter Email Address';
+			$emailError = 'Please enter Client Email Address';
 			$valid = false;
 		} else if ( !filter_var($email,FILTER_VALIDATE_EMAIL) ) {
 			$emailError = 'Please enter a valid Email Address';
@@ -38,31 +29,20 @@
 		}
 		
 		if (empty($mobile)) {
-			$mobileError = 'Please enter Mobile Number';
+			$mobileError = 'Please enter Business Name';
 			$valid = false;
 		}
 		
-		// update data
+		// insert data
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE customers  set name = ?, email = ?, mobile =? WHERE id = ?";
+			$sql = "INSERT INTO solutio (name,email,mobile) values(?, ?, ?)";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($name,$email,$mobile,$id));
+			$q->execute(array($name,$email,$mobile));
 			Database::disconnect();
-			header("Location: index.php");
+			header("Location: solutio.php");
 		}
-	} else {
-		$pdo = Database::connect();
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "SELECT * FROM customers where id = ?";
-		$q = $pdo->prepare($sql);
-		$q->execute(array($id));
-		$data = $q->fetch(PDO::FETCH_ASSOC);
-		$name = $data['name'];
-		$email = $data['email'];
-		$mobile = $data['mobile'];
-		Database::disconnect();
 	}
 ?>
 
@@ -80,12 +60,12 @@
     
     			<div class="span10 offset1">
     				<div class="row">
-		    			<h3>Update a Customer</h3>
+		    			<h3>Create a Customer</h3>
 		    		</div>
     		
-	    			<form class="form-horizontal" action="solutio_update.php?id=<?php echo $id?>" method="post">
+	    			<form class="form-horizontal" action="solutio_create.php" method="post">
 					  <div class="control-group <?php echo !empty($nameError)?'error':'';?>">
-					    <label class="control-label">Name</label>
+					    <label class="control-label">Customer Name</label>
 					    <div class="controls">
 					      	<input name="name" type="text"  placeholder="Name" value="<?php echo !empty($name)?$name:'';?>">
 					      	<?php if (!empty($nameError)): ?>
@@ -94,25 +74,25 @@
 					    </div>
 					  </div>
 					  <div class="control-group <?php echo !empty($emailError)?'error':'';?>">
-					    <label class="control-label">Email Address</label>
+					    <label class="control-label">Customer Email Address</label>
 					    <div class="controls">
-					      	<input name="email" type="text" placeholder="Email Address" value="<?php echo !empty($email)?$email:'';?>">
+					      	<input name="email" type="text" placeholder="Client Email Address" value="<?php echo !empty($email)?$email:'';?>">
 					      	<?php if (!empty($emailError)): ?>
 					      		<span class="help-inline"><?php echo $emailError;?></span>
 					      	<?php endif;?>
 					    </div>
 					  </div>
 					  <div class="control-group <?php echo !empty($mobileError)?'error':'';?>">
-					    <label class="control-label">Mobile Number</label>
+					    <label class="control-label">Business Name</label>
 					    <div class="controls">
-					      	<input name="mobile" type="text"  placeholder="Mobile Number" value="<?php echo !empty($mobile)?$mobile:'';?>">
+					      	<input name="mobile" type="text"  placeholder="Business Name" value="<?php echo !empty($mobile)?$mobile:'';?>">
 					      	<?php if (!empty($mobileError)): ?>
 					      		<span class="help-inline"><?php echo $mobileError;?></span>
 					      	<?php endif;?>
 					    </div>
 					  </div>
 					  <div class="form-actions">
-						  <button type="submit" class="btn btn-success">Update</button>
+						  <button type="submit" class="btn btn-success">Create</button>
 						  <a class="btn" href="solutio.php">Back</a>
 						</div>
 					</form>

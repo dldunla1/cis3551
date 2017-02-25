@@ -37,11 +37,11 @@
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO customers (name,email,mobile) values(?, ?, ?)";
+			$sql = "INSERT INTO solutio (name,email,mobile) values(?, ?, ?)";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($name,$email,$mobile));
 			Database::disconnect();
-			header("Location: index.php");
+			header("Location: solutio.php");
 		}
 	}
 ?>
@@ -63,7 +63,7 @@
 		    			<h3>Create a Customer</h3>
 		    		</div>
     		
-	    			<form class="form-horizontal" action="create.php" method="post">
+	    			<form class="form-horizontal" action="solutio_create.php" method="post">
 					  <div class="control-group <?php echo !empty($nameError)?'error':'';?>">
 					    <label class="control-label">Name</label>
 					    <div class="controls">
@@ -93,7 +93,7 @@
 					  </div>
 					  <div class="form-actions">
 						  <button type="submit" class="btn btn-success">Create</button>
-						  <a class="btn" href="index.php">Back</a>
+						  <a class="btn" href="solutio.php">Back</a>
 						</div>
 					</form>
 				</div>

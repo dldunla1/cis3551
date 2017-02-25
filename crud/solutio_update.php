@@ -25,12 +25,12 @@
 		// validate input
 		$valid = true;
 		if (empty($name)) {
-			$nameError = 'Please enter Name';
+			$nameError = 'Please enter Client Name';
 			$valid = false;
 		}
 		
 		if (empty($email)) {
-			$emailError = 'Please enter Email Address';
+			$emailError = 'Please enter Client Email Address';
 			$valid = false;
 		} else if ( !filter_var($email,FILTER_VALIDATE_EMAIL) ) {
 			$emailError = 'Please enter a valid Email Address';
@@ -38,7 +38,7 @@
 		}
 		
 		if (empty($mobile)) {
-			$mobileError = 'Please enter Mobile Number';
+			$mobileError = 'Please enter Business Name';
 			$valid = false;
 		}
 		
@@ -46,16 +46,16 @@
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE customers  set name = ?, email = ?, mobile =? WHERE id = ?";
+			$sql = "UPDATE solutio  set name = ?, email = ?, mobile =? WHERE id = ?";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($name,$email,$mobile,$id));
 			Database::disconnect();
-			header("Location: index.php");
+			header("Location: solutio.php");
 		}
 	} else {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "SELECT * FROM customers where id = ?";
+		$sql = "SELECT * FROM 	solutio where id = ?";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		$data = $q->fetch(PDO::FETCH_ASSOC);
@@ -80,12 +80,12 @@
     
     			<div class="span10 offset1">
     				<div class="row">
-		    			<h3>Update a Customer</h3>
+		    			<h3>Update a Client</h3>
 		    		</div>
     		
 	    			<form class="form-horizontal" action="solutio_update.php?id=<?php echo $id?>" method="post">
 					  <div class="control-group <?php echo !empty($nameError)?'error':'';?>">
-					    <label class="control-label">Name</label>
+					    <label class="control-label">Client Name</label>
 					    <div class="controls">
 					      	<input name="name" type="text"  placeholder="Name" value="<?php echo !empty($name)?$name:'';?>">
 					      	<?php if (!empty($nameError)): ?>
@@ -94,7 +94,7 @@
 					    </div>
 					  </div>
 					  <div class="control-group <?php echo !empty($emailError)?'error':'';?>">
-					    <label class="control-label">Email Address</label>
+					    <label class="control-label">Client Email Address</label>
 					    <div class="controls">
 					      	<input name="email" type="text" placeholder="Email Address" value="<?php echo !empty($email)?$email:'';?>">
 					      	<?php if (!empty($emailError)): ?>
@@ -103,9 +103,9 @@
 					    </div>
 					  </div>
 					  <div class="control-group <?php echo !empty($mobileError)?'error':'';?>">
-					    <label class="control-label">Mobile Number</label>
+					    <label class="control-label">Business Name</label>
 					    <div class="controls">
-					      	<input name="mobile" type="text"  placeholder="Mobile Number" value="<?php echo !empty($mobile)?$mobile:'';?>">
+					      	<input name="mobile" type="text"  placeholder="Business Name" value="<?php echo !empty($mobile)?$mobile:'';?>">
 					      	<?php if (!empty($mobileError)): ?>
 					      		<span class="help-inline"><?php echo $mobileError;?></span>
 					      	<?php endif;?>
