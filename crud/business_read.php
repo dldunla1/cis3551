@@ -6,16 +6,16 @@
 	}
 	
 	if ( null==$id ) {
-		header("Location: events.php");
+		header("Location: business.php");
 	} else {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "SELECT * FROM events where id = ?";
+		$sql = "SELECT * FROM business where id = ?";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		$data = $q->fetch(PDO::FETCH_ASSOC);
 		Database::disconnect();
-	} 
+	}
 ?>
 
 <!DOCTYPE html>
@@ -31,44 +31,52 @@
     
     			<div class="span10 offset1">
     				<div class="row">
-		    			<h3>Read an Event</h3>
+		    			<h3>Read a Business Details</h3>
 		    		</div>
 		    		
 	    			<div class="form-horizontal" >
 					  <div class="control-group">
-					    <label class="control-label">Date</label>
+					    <label class="control-label">Name</label>
 					    <div class="controls">
 						    <label class="checkbox">
-						     	<?php echo $data['event_date'];?>
+						     	<?php echo $data['business_name'];?>
 						    </label>
 					    </div>
 					  </div>
+					  
 					  <div class="control-group">
-					    <label class="control-label">Time</label>
+					    <label class="control-label">WEB URL</label>
 					    <div class="controls">
 					      	<label class="checkbox">
-						     	<?php echo $data['event_time'];?>
+						     	<?php echo $data['business_site'];?>
 						    </label>
 					    </div>
 					  </div>
+					 
+					 
+					 
 					  <div class="control-group">
-					    <label class="control-label">Location</label>
+					    <label class="control-label">Start Date</label>
 					    <div class="controls">
 					      	<label class="checkbox">
-						     	<?php echo $data['event_location'];?>
+						     	<?php echo $data['business_start'];?>
 						    </label>
 					    </div>
 					  </div>
-					  <div class="control-group">
-					    <label class="control-label">Description</label>
+					  
+					  
+					   <div class="control-group">
+					    <label class="control-label">End Date</label>
 					    <div class="controls">
 					      	<label class="checkbox">
-						     	<?php echo $data['event_description'];?>
+						     	<?php echo $data['business_end'];?>
 						    </label>
 					    </div>
+					  </div>
+					 
 					  </div>
 					    <div class="form-actions">
-						  <a class="btn" href="events.php">Back</a>
+						  <a class="btn" href="business.php">Back</a>
 					   </div>
 					
 					 

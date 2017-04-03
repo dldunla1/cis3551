@@ -9,20 +9,21 @@
 <body>
     <div class="container">
     		<div class="row">
-    			<h3>Solutio Customer FIle</h3>
+    			<h3>Domain File</h3>
     		</div>
 			<div class="row">
 				<p>
-					<a href="solutio_create.php" class="btn btn-success">Create</a>
+					<a href="domains_create.php" class="btn btn-success">Create</a>
 				</p>
 				
 				<table class="table table-striped table-bordered">
 		              <thead>
 		                <tr>
-		                  <th>Client Name</th>
-		                  <th>Client Email Address</th>
-		                  <th>Business Name</th>
-		              <th>Action</th>
+		                  <th> Customer Name</th>
+		                  <th> Business Name</th>
+						  <th> Domain Name</th>
+		                  <th> Renewal Date</th>
+		                  <th>Action</th>
 		                </tr>
 		              </thead>
 		              <tbody>
@@ -30,17 +31,22 @@
 					   include 'database.php';
 					   $pdo = Database::connect();
 					   $sql = 'SELECT * FROM customers ORDER BY id DESC';
+					   $sql = 'SELECT * FROM business ORDER BY id DESC';
+   					   $sql = 'SELECT * FROM business ORDER BY id DESC';
+
 	 				   foreach ($pdo->query($sql) as $row) {
 						   		echo '<tr>';
-							   	echo '<td>'. $row['name'] . '</td>';
-							   	echo '<td>'. $row['email'] . '</td>';
-							   	echo '<td>'. $row['mobile'] . '</td>';
+							   	echo '<td>'. $row['cust_id'] . '</td>';
+							   	echo '<td>'. $row['business_name'] . '</td>';
+							   	echo '<td>'. $row['business_site'] . '</td>';
+							   	echo '<td>'. $row['business_end'] . '</td>';
+							   	
 							   	echo '<td width=250>';
-							   	echo '<a class="btn" href="solutio_read.php?id='.$row['id'].'">Read</a>';
+							   	echo '<a class="btn" href="domains_read.php?id='.$row['id'].'">Read</a>';
 							   	echo '&nbsp;';
-							   	echo '<a class="btn btn-success" href="solutio_update.php?id='.$row['id'].'">Update</a>';
+							   	echo '<a class="btn btn-success" href="domains_update.php?id='.$row['id'].'">Update</a>';
 							   	echo '&nbsp;';
-							   	echo '<a class="btn btn-danger" href="solutio_delete.php?id='.$row['id'].'">Delete</a>';
+							   	echo '<a class="btn btn-danger" href="domains_delete.php?id='.$row['id'].'">Delete</a>';
 							   	echo '</td>';
 							   	echo '</tr>';
 					   }

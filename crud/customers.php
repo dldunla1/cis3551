@@ -9,7 +9,7 @@
 <body>
     <div class="container">
     		<div class="row">
-    			<h3>Customer FIle</h3>
+    			<h3>Customer File</h3>
     		</div>
 			<div class="row">
 				<p>
@@ -21,7 +21,7 @@
 		                <tr>
 		                  <th>Name</th>
 		                  <th>Email Address</th>
-		                  <th>Mobile Number</th>
+		                  
 		                  <th>Action</th>
 		                </tr>
 		              </thead>
@@ -29,16 +29,16 @@
 		              <?php 
 					   include 'database.php';
 					   $pdo = Database::connect();
-					   $sql = 'SELECT * FROM solutio ORDER BY id DESC';
+					   $sql = 'SELECT * FROM customers ORDER BY id DESC';
 	 				   foreach ($pdo->query($sql) as $row) {
 						   		echo '<tr>';
-							   	echo '<td>'. $row['name'] . '</td>';
-							   	echo '<td>'. $row['email'] . '</td>';
-							   	echo '<td>'. $row['mobile'] . '</td>';
+							   	echo '<td>'. $row['cust_name'] . '</td>';
+							   	echo '<td>'. $row['cust_email'] . '</td>';
+							   	
 							   	echo '<td width=250>';
 							   	echo '<a class="btn" href="read.php?id='.$row['id'].'">Read</a>';
 							   	echo '&nbsp;';
-							   	echo '<a class="btn btn-success" href="solutio_update.php?id='.$row['id'].'">Update</a>';
+							   	echo '<a class="btn btn-success" href="update.php?id='.$row['id'].'">Update</a>';
 							   	echo '&nbsp;';
 							   	echo '<a class="btn btn-danger" href="delete.php?id='.$row['id'].'">Delete</a>';
 							   	echo '</td>';

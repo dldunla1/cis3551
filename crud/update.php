@@ -8,19 +8,19 @@
 	}
 	
 	if ( null==$id ) {
-		header("Location: solutio.php");
+		header("Location: index.php");
 	}
 	
 	if ( !empty($_POST)) {
 		// keep track validation errors
 		$nameError = null;
 		$emailError = null;
-		$mobileError = null;
+		
 		
 		// keep track post values
-		$name = $_POST['name'];
-		$email = $_POST['email'];
-		$mobile = $_POST['mobile'];
+		$name = $_POST['cust_name'];
+		$email = $_POST['cust_email'];
+		
 		
 		// validate input
 		$valid = true;
@@ -37,18 +37,15 @@
 			$valid = false;
 		}
 		
-		if (empty($mobile)) {
-			$mobileError = 'Please enter Mobile Number';
-			$valid = false;
-		}
+		
 		
 		// update data
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE customers  set name = ?, email = ?, mobile =? WHERE id = ?";
+			$sql = "UPDATE customers  set name = ?, email = ?, WHERE id = ?";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($name,$email,$mobile,$id));
+			$q->execute(array($name,$email, $id));
 			Database::disconnect();
 			header("Location: index.php");
 		}
@@ -59,9 +56,9 @@
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		$data = $q->fetch(PDO::FETCH_ASSOC);
-		$name = $data['name'];
-		$email = $data['email'];
-		$mobile = $data['mobile'];
+		$name = $data['cust_name'];
+		$email = $data['cust_email'];
+		
 		Database::disconnect();
 	}
 ?>
@@ -83,7 +80,7 @@
 		    			<h3>Update a Customer</h3>
 		    		</div>
     		
-	    			<form class="form-horizontal" action="solutio_update.php?id=<?php echo $id?>" method="post">
+	    			<form class="form-horizontal" action="update.php?id=<?php echo $id?>" method="post">
 					  <div class="control-group <?php echo !empty($nameError)?'error':'';?>">
 					    <label class="control-label">Name</label>
 					    <div class="controls">
@@ -102,18 +99,10 @@
 					      	<?php endif;?>
 					    </div>
 					  </div>
-					  <div class="control-group <?php echo !empty($mobileError)?'error':'';?>">
-					    <label class="control-label">Mobile Number</label>
-					    <div class="controls">
-					      	<input name="mobile" type="text"  placeholder="Mobile Number" value="<?php echo !empty($mobile)?$mobile:'';?>">
-					      	<?php if (!empty($mobileError)): ?>
-					      		<span class="help-inline"><?php echo $mobileError;?></span>
-					      	<?php endif;?>
-					    </div>
-					  </div>
+					
 					  <div class="form-actions">
 						  <button type="submit" class="btn btn-success">Update</button>
-						  <a class="btn" href="solutio.php">Back</a>
+						  <a class="btn" href="index.php">Back</a>
 						</div>
 					</form>
 				</div>

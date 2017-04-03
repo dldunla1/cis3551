@@ -39,7 +39,7 @@
 					    <label class="control-label">Name</label>
 					    <div class="controls">
 						    <label class="checkbox">
-						     	<?php echo $data['name'];?>
+						     	<?php echo $data['cust_name'];?>
 						    </label>
 					    </div>
 					  </div>
@@ -47,17 +47,11 @@
 					    <label class="control-label">Email Address</label>
 					    <div class="controls">
 					      	<label class="checkbox">
-						     	<?php echo $data['email'];?>
+						     	<?php echo $data['cust_email'];?>
 						    </label>
 					    </div>
 					  </div>
-					  <div class="control-group">
-					    <label class="control-label">Mobile Number</label>
-					    <div class="controls">
-					      	<label class="checkbox">
-						     	<?php echo $data['mobile'];?>
-						    </label>
-					    </div>
+					 
 					  </div>
 					    <div class="form-actions">
 						  <a class="btn" href="index.php">Back</a>
