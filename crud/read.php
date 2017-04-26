@@ -6,7 +6,7 @@
 	}
 	
 	if ( null==$id ) {
-		header("Location: index.php");
+		header("Location: customers1.php");
 	} else {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -39,7 +39,7 @@
 					    <label class="control-label">Name</label>
 					    <div class="controls">
 						    <label class="checkbox">
-						     	<?php echo $data['cust_name'];?>
+						     	<?php echo $data['name'];?>
 						    </label>
 					    </div>
 					  </div>
@@ -47,14 +47,20 @@
 					    <label class="control-label">Email Address</label>
 					    <div class="controls">
 					      	<label class="checkbox">
-						     	<?php echo $data['cust_email'];?>
+						     	<?php echo $data['email'];?>
 						    </label>
 					    </div>
 					  </div>
-					 
+					  <div class="control-group">
+					    <label class="control-label">Payment Info</label>
+					    <div class="controls">
+					      	<label class="checkbox">
+						     	<?php echo $data['payment'];?>
+						    </label>
+					    </div>
 					  </div>
 					    <div class="form-actions">
-						  <a class="btn" href="index.php">Back</a>
+						  <a class="btn" href="customers1.php">Back</a>
 					   </div>
 					
 					 

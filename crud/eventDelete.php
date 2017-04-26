@@ -13,13 +13,13 @@
 		// delete data
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "DELETE FROM business  WHERE id = ?";
+		$sql = "DELETE FROM Events  WHERE id = ?";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		Database::disconnect();
-		header("Location: business.php");
+		header("Location: events.php");
 		
-	} 
+	}
 ?>
 
 <!DOCTYPE html>
@@ -35,15 +35,15 @@
     
     			<div class="span10 offset1">
     				<div class="row">
-		    			<h3>Delete a business</h3>
+		    			<h3>Delete an Event</h3>
 		    		</div>
 		    		
-	    			<form class="form-horizontal" action="business_delete.php" method="post">
+	    			<form class="form-horizontal" action="eventDelete.php" method="post">
 	    			  <input type="hidden" name="id" value="<?php echo $id;?>"/>
 					  <p class="alert alert-error">Are you sure to delete ?</p>
 					  <div class="form-actions">
 						  <button type="submit" class="btn btn-danger">Yes</button>
-						  <a class="btn" href="business.php">No</a>
+						  <a class="btn" href="events.php">No</a>
 						</div>
 					</form>
 				</div>

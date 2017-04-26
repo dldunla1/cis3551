@@ -9,7 +9,7 @@
 <body>
     <div class="container">
     		<div class="row">
-    			<h3>Customer File</h3>
+    			<h3>Customer Grid</h3>
     		</div>
 			<div class="row">
 				<p>
@@ -21,7 +21,7 @@
 		                <tr>
 		                  <th>Name</th>
 		                  <th>Email Address</th>
-		                  
+		                  <th>Mobile Number</th>
 		                  <th>Action</th>
 		                </tr>
 		              </thead>
@@ -32,9 +32,9 @@
 					   $sql = 'SELECT * FROM customers ORDER BY id DESC';
 	 				   foreach ($pdo->query($sql) as $row) {
 						   		echo '<tr>';
-							   	echo '<td>'. $row['cust_name'] . '</td>';
-							   	echo '<td>'. $row['cust_email'] . '</td>';
-							   	
+							   	echo '<td>'. $row['name'] . '</td>';
+							   	echo '<td>'. $row['email'] . '</td>';
+							   	echo '<td>'. $row['mobile'] . '</td>';
 							   	echo '<td width=250>';
 							   	echo '<a class="btn" href="read.php?id='.$row['id'].'">Read</a>';
 							   	echo '&nbsp;';
